@@ -7,15 +7,14 @@ Attribute VB_Name = "mdlMain"
 
 Private Const ColumnIndex As Integer = 3
 Private Const InicioDaPesquisa As Long = 3
-Private Const ColunaTipoDeArquivo As String = "C"
 Private Const ColunaStatus As String = "E"
-Private Const ColunaTarefa As String = "D"
+Private Const ColunaTarefa As String = "F"
+Private Const ColunaDiario As String = "D"
 Private cell As Range
 Private strBody As String
-Private tmp As String
+
 
 Option Explicit
-
 
 Sub open_Repository(ByVal control As IRibbonControl) '' Criar repositorio
 
@@ -48,10 +47,8 @@ Dim ws As Worksheet: Set ws = Worksheets(ActiveSheet.Name)
 Dim eMail As New clsOutlook
 
 '' Principal
-Dim strFiltro As String: strFiltro = Etiqueta("eMail_Search")
+Dim strSearch As String: strSearch = Etiqueta("eMail_Search")
 Dim strSubject As String: strSubject = Etiqueta("eMail_Subject")
-'Dim strTo As String: strTo = Etiqueta("eMail_To")
-'Dim strCC As String: strCC = Etiqueta("eMail_CC")
 
 '' Confirmação de envio de e-mail
 Dim sTitle As String:       sTitle = ws.Name
@@ -70,10 +67,11 @@ Dim linha As Long: linha = InicioDaPesquisa
 
         '' To
         .strSubject = ws.Range(strSubject).Value
+        .strCategory = ws.Range(strSearch).Value
 
-        '' Subject
+        '' Body
         For Each cell In ws.Range("$" & ColunaTarefa & "$" & linha & ":$" & ColunaTarefa & "$" & lRow)
-            If InStr(ws.Range("$" & ColunaStatus & "$" & linha).Value, ws.Range(strFiltro).Value) <> 0 Then
+            If InStr(ws.Range("$" & ColunaStatus & "$" & linha).Value, ws.Range(strSearch).Value) <> 0 Then
                 If (Len(cell.Value) > 0) Then strBody = strBody & cell.Value & vbNewLine
                 '' START_TIME
                 .strStart = IIf(ws.Range("G" & linha).Value <> "", ws.Range("G" & linha).Value, Now())
@@ -112,7 +110,7 @@ Dim ws As Worksheet: Set ws = Worksheets(ActiveSheet.Name)
 Dim eMail As New clsOutlook
 
 '' Principal
-Dim strFiltro As String: strFiltro = Etiqueta("eMail_Search")
+Dim strSearch As String: strSearch = Etiqueta("eMail_Search")
 Dim strSubject As String: strSubject = Etiqueta("eMail_Subject")
 Dim strTo As String: strTo = Etiqueta("eMail_To")
 Dim strCC As String: strCC = Etiqueta("eMail_CC")
@@ -136,11 +134,11 @@ Dim linha As Long: linha = InicioDaPesquisa
         .strTo = strTo
         .strCC = strCC
         .strSubject = ws.Range(strSubject).Value
-        .strCategory = ws.Range("C1").Value
+        .strCategory = ws.Range(strSearch).Value
 
         '' Subject
-        For Each cell In ws.Range("$" & ColunaTarefa & "$" & linha & ":$" & ColunaTarefa & "$" & lRow)
-            If InStr(ws.Range("$" & ColunaStatus & "$" & linha).Value, ws.Range(strFiltro).Value) <> 0 Then
+        For Each cell In ws.Range("$" & ColunaDiario & "$" & linha & ":$" & ColunaDiario & "$" & lRow)
+            If InStr(ws.Range("$" & ColunaStatus & "$" & linha).Value, ws.Range(strSearch).Value) <> 0 Then
                 If (Len(cell.Value) > 0) Then strBody = strBody & cell.Value & vbNewLine
             End If
             linha = linha + 1

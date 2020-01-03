@@ -1050,9 +1050,9 @@ Dim l As ListObjects
 
 'Worksheets("000000_APP_NomeRobo").Range("t1").ListNames
 
-For Each l In ws.Names
-    Debug.Print l
-Next
+'For Each l In ws.Names
+'    Debug.Print l
+'Next
 
 
 End Sub
