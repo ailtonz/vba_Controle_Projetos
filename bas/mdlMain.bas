@@ -5,6 +5,9 @@ Attribute VB_Name = "mdlMain"
 '' [ git ]
 '' https://githowto.com/pt-BR/create_a_project
 
+'' [ Excel named range - how to define and use names in Excel ]
+'' https://www.ablebits.com/office-addins-blog/2017/07/11/excel-name-named-range-define-use/
+
 Private Const ColumnIndex As Integer = 3
 Private Const InicioDaPesquisa As Long = 3
 Private Const ColunaStatus As String = "E"
@@ -128,10 +131,22 @@ If (Dir(pathExit) <> "") Then Kill pathExit
 Dim lRow As Long: lRow = ws.Cells(Rows.Count, ColumnIndex).End(xlUp).Row
 Dim linha As Long: linha = InicioDaPesquisa
 
+'' #dbDados - Usando base auxiliar de emails
+Dim A As Variant, i As Integer, tmp As String: tmp = ""
+A = Range(strTo)
+
+
     With eMail
 
         '' To
-        .strTo = strTo
+        '' #dbDados - Usando base auxiliar de emails
+        For i = 1 To UBound(A)
+            tmp = tmp & A(i, 1) & ";"
+        Next i
+                
+        .strTo = Left(tmp, Len(tmp) - 1) ''ws.Range(strTo).Value ''strTo
+        
+        
         .strCC = strCC
         .strSubject = ws.Range(strSubject).Value
         .strCategory = ws.Range(strSearch).Value

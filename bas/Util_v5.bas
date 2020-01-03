@@ -1044,18 +1044,6 @@ Public Function CreateDir(strPath As String) '' Criar estrutura de diretorios
     Next
 End Function
 
-Sub testeNames()
-Dim ws As Worksheet: Set ws = Worksheets(ActiveSheet.Name)
-Dim l As ListObjects
-
-'Worksheets("000000_APP_NomeRobo").Range("t1").ListNames
-
-'For Each l In ws.Names
-'    Debug.Print l
-'Next
-
-
-End Sub
 
 Public Function UserName() As String ' %HOMEPATH%\Downloads
 
@@ -1098,3 +1086,39 @@ If (resposta = vbYes) Then
 End If
 
 End Sub
+
+
+Sub teste_array() '' Validado
+
+'Dim ws As Worksheet: Set ws = Worksheets(ActiveSheet.Name)
+'Dim strTo As String: strTo = Etiqueta("eMail_To")
+'
+''Dim myArr As Variant
+''myArr = Range("dbDados!$B$2:$B$3")
+''Stop
+'
+'Dim A As Variant, i As Integer, tmp As String: tmp = ""
+'A = Range(strTo)
+'
+'For i = 1 To UBound(A)
+'    tmp = tmp & A(i, 1) & ";"
+'Next i
+'
+'Debug.Print Left(tmp, Len(tmp) - 1)
+
+End Sub
+
+
+Sub testeNames() '' Não está funcionando
+'Dim ws As Worksheet: Set ws = Worksheets(ActiveSheet.Name)
+'Dim l As ListObjects
+
+'Worksheets("000000_APP_NomeRobo").Range("t1").ListNames
+
+'For Each l In ws.Names
+'    Debug.Print l
+'Next
+
+
+End Sub
+
