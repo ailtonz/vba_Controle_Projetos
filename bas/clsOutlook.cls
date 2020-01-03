@@ -60,7 +60,13 @@ Set myItem = OutApp.createItem(olAppointmentItem)
 
 With myItem
     
-    .Subject = strSubject
+    ' Subject
+    If (Len(strCategory) > 0) Then
+        .Subject = "[" & UCase(strCategory) & "] " & strSubject
+    Else
+        .Subject = strSubject
+    End If
+    
     .body = strBody
     .Start = strStart
     .ReminderMinutesBeforeStart = strRemind_Time
